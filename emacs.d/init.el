@@ -1,18 +1,12 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list 'package-archives
-			   '("melpa" . "https://melpa.org/packages/") t)
-  (add-to-list 'package-archives
 			   '("mepla-stable" . "https://stable.melpa.org/packages/") t)
   (package-initialize))
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
-(when (executable-find "git")
-  (require 'magit nil t)
-  (global-set-key (kbd "C-x g") 'magit-status))
-
-(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+;;(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 ;; mini buffer
 (column-number-mode t)
@@ -57,3 +51,54 @@
 (when (eq system-type 'w32)
   (set-file-name-coding-system 'cp932)
   (setq locale-coding-system 'cp932))
+
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+
+;; completion
+(require 'auto-complete)
+(require 'auto-complete-config)
+
+;; magit
+(when (executable-find "git")
+  (require 'magit nil t)
+  (global-set-key (kbd "C-x g") 'magit-status))
+
+;; helm
+;; http://emacs.rubikitch.com/sd1504-helm/
+(setq recentf-max-saved-items 500)
+(setq recentf-exclude
+	  '("/TAGS$" "/var/tmp"))
+(require 'recentf-ext)
+(setq helm-for-files-preferred-list
+	  '(helm-source-buffers-list
+		helm-source-recentf
+		helm-source-bookmarks
+		helm-source-file-cache
+		helm-source-files-in-current-dir))
+
+(define-key global-map (kbd "C-x M-f") 'helm-for-files)
+
+;; golang
+(require 'go-autocomplete)
+(add-hook 'go-mode-hook (lambda ()
+						  (local-set-key (kdb "M-.") 'godef-jump)))
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;; scala
+(require 'scala-mode)
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(setq ensime-completion-style 'auto-complete)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (helm magit jedi go-mode go-autocomplete ensime))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
