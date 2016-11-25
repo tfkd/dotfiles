@@ -15,8 +15,8 @@ autoload -Uz colors && colors
 autoload -Uz vcs_info
 setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "${fg[yellow]}!${reset_color}"
-zstyle ':vcs_info:git:*' unstagedstr "${fg[red]}+${reset_color}"
+zstyle ':vcs_info:git:*' stagedstr "%{${fg[yellow]}%}!%{${reset_color}%}"
+zstyle ':vcs_info:git:*' unstagedstr "%{${fg[red]}%}+%{${reset_color}%}"
 precmd() { vcs_info }
 #PROMPT='${vcs_info_msg_0_}%~ %{$fg[blue]%}%%%{${reset_color}%} '
 prompt__ok_emoji_=$'\U1f431 '
