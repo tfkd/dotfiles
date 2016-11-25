@@ -59,6 +59,9 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 
+;; yasnippet
+(yas-global-mode 1)
+
 ;; magit
 (when (executable-find "git")
   (require 'magit nil t)
