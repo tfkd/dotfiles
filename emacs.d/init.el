@@ -79,8 +79,25 @@
 		helm-source-bookmarks
 		helm-source-file-cache
 		helm-source-files-in-current-dir))
+(require 'helm-config)
 
 (define-key global-map (kbd "C-x M-f") 'helm-for-files)
+
+;; gtags
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(helm-gtags-prefix-key " M-g")
+ '(helm-gtags-suggested-key-mapping t)
+ '(package-selected-packages
+   (quote
+	(protobuf-mode markdown-mode helm-gtags helm magit jedi go-mode go-autocomplete ensime))))
+(require 'helm-gtags)
+
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
 
 ;; golang
 (require 'go-autocomplete)
@@ -93,12 +110,7 @@
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (setq ensime-completion-style 'auto-complete)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (helm magit jedi go-mode go-autocomplete ensime))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
