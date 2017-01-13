@@ -1,7 +1,7 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list 'package-archives
-			   '("mepla-stable" . "https://stable.melpa.org/packages/") t)
+               '("mepla-stable" . "https://stable.melpa.org/packages/") t)
   (package-initialize))
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
@@ -20,12 +20,12 @@
 
 ;; indentation
 (setq-default c-basic-offset 4
-			  tab-width 4
-			  indent-tabs-mode t)
+              tab-width 4
+              indent-tabs-mode nil)
 
 (add-hook 'c-mode-common-hook
-		  (lambda ()
-			(c-set-style "linux")))
+          (lambda ()
+            (c-set-style "linux")))
 
 ;; high light
 ;(global-hl-line-mode t)
@@ -71,14 +71,14 @@
 ;; http://emacs.rubikitch.com/sd1504-helm/
 (setq recentf-max-saved-items 500)
 (setq recentf-exclude
-	  '("/TAGS$" "/var/tmp"))
+      '("/TAGS$" "/var/tmp"))
 (require 'recentf-ext)
 (setq helm-for-files-preferred-list
-	  '(helm-source-buffers-list
-		helm-source-recentf
-		helm-source-bookmarks
-		helm-source-file-cache
-		helm-source-files-in-current-dir))
+      '(helm-source-buffers-list
+        helm-source-recentf
+        helm-source-bookmarks
+        helm-source-file-cache
+        helm-source-files-in-current-dir))
 (require 'helm-config)
 
 (define-key global-map (kbd "C-x M-f") 'helm-for-files)
@@ -93,7 +93,7 @@
  '(helm-gtags-suggested-key-mapping t)
  '(package-selected-packages
    (quote
-	(protobuf-mode markdown-mode helm-gtags helm magit jedi go-mode go-autocomplete ensime))))
+    (protobuf-mode markdown-mode helm-gtags helm magit jedi go-mode go-autocomplete ensime))))
 (require 'helm-gtags)
 
 (add-hook 'c-mode-hook 'helm-gtags-mode)
@@ -102,7 +102,7 @@
 ;; golang
 (require 'go-autocomplete)
 (add-hook 'go-mode-hook (lambda ()
-						  (local-set-key (kdb "M-.") 'godef-jump)))
+                          (local-set-key (kdb "M-.") 'godef-jump)))
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; scala
