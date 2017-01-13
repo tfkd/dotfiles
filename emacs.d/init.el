@@ -8,6 +8,9 @@
 
 ;;(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
+;; disable menu bar
+(menu-bar-mode -1)
+
 ;; mini buffer
 (column-number-mode t)
 
